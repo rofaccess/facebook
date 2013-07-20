@@ -1,0 +1,15 @@
+<h1>Listing posts</h1>
+
+<ul>
+  <% @posts.each do |post| %>
+    <li>
+      <h3><%= post.state %></h3>
+      <% if post.has_photo? %>
+        <%= image_tag post.photo_path %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+
+
+<%= link_to 'New Post', new_post_path %>
