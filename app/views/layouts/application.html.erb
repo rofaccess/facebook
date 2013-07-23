@@ -4,103 +4,66 @@
   <title>Facebook</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
+  <%= csrf_meta_tags %> 
 </head>
 <body>
-	
+	<div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <button data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar" type="button">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="#" class="brand" style="font-size:20pt;font-weight: bold;">facebook</a>
+          <div class="nav-collapse collapse">
+            <p class="navbar-text pull-right">            	
+            	<% if not user_signed_in? %>				
+					<%- if controller_name != 'sessions' %>
+  						<%= link_to "Ingresar", new_user_session_path, :class => 'btn btn-small'  %>  						
+  					<% end -%>	
+  					<%- if devise_mapping.registerable? && controller_name != 'registrations' %>	
+						<%= link_to "Registrarse", new_user_registration_path, :class => 'btn btn-small'  %>
+					<% end -%>									
+				<% end %>				
+            </p>
+           
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
 
-	<div class="topbar">
-		<div class="topbar-inner">
-			<div class="container-fluid">		   
-				<a class="brand">facebook</a>
-			    <ul class="nav">
-			        <li class="active"><%= link_to 'Inicio', root_path %></li>
-			        <li class=""><%= link_to 'Posts', posts_path %></li>        
-			    </ul>
-			    <p class="navbar-text pull-right">
-					<% if user_signed_in? %>
-					  Logged in as <strong><%= current_user.email %></strong>.
-					  <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
-					  <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-					<% else %>
-					  <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
-					  <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
-					<% end %>
-				</p>
-		    </div>		   
-		</div>
-	</div>
-
-	<div class="container-fluid">
-		<div class="content">
-			<div class="hero-unit">
-				<h1>Bienvenido a Facebook!</h1>
-				<p>Conoce nuevos amigos, contacta con los amigos ke ya tienes,
-				comparte lo ke kieras, esto y mucho mas solo aki, en tu pagina 
-				favorita.</p>
-				
+    <div class="container">
+    	<% if notice %>
+			<div class="alert alert-info">
+				<button data-dismiss="alert" class="close" type="button">×</button>
+				<%= notice %>
 			</div>
-
-
-			<% if notice %>
-			  	<p class="alert alert-notice"><%= notice %></p>
-			<% end %>
-			<% if alert %>
-		  		<p class="alert alert-error"><%= alert %></p>
-			<% end %>
-
-			<%= yield %>
-		</div>
-		<div class="sidebar">
-			<div class="well">
-			<h5>Sidebar</h5>
-			<ul>
-			<li>
-			<a href="#">Link</a>
-			</li>
-			<li>
-			<a href="#">Link</a>
-			</li>
-			<li>
-			<a href="#">Link</a>
-			</li>
-			<li>
-			<a href="#">Link</a>
-			</li>
-			</ul>
-			<h5>Sidebar</h5>
-			<ul>
-			<li>
-			<a href="#">Link</a>
-			</li>
-			<li>
-			<a href="#">Link</a>
-			</li>
-			<li>
-			<a href="#">Link</a>
-			</li>
-			<li>
-			<a href="#">Link</a>
-			</li>
-			<li>
-			<a href="#">Link</a>
-			</li>
-			<li>
-			<a href="#">Link</a>
-			</li>
-			</ul>
-			<h5>Sidebar</h5>
-			<ul>
-			<li>
-			<a href="#">Link</a>
-			</li>
-			<li>
-			<a href="#">Link</a>
-			</li>
-			</ul>
+		<% end %>
+		<% if alert %>
+			<div class="alert alert-error">
+				<button data-dismiss="alert" class="close" type="button">×</button>	
+				<%= alert %>
 			</div>
-		</div>
-	</div>
-
+		<% end %>    
+   	</div>   
+	<div class="container">
+  		<div class="row-fluid">    
+    		<div class="span8">    
+    			<center> 
+			    <br>
+			    <br>
+			    <br>      
+			    <p style="font-size:20pt; color:grey; line-height: 25pt; font-weight: bold;">	
+					<br> Facebook te ayuda a comunicarte y
+				    <br> compartir con las personas que forman
+				    <br> 	parte de tu vida.
+				</p>      
+			    <img class="logo" src="/assets/mapa.png">  
+			    </center>
+			</div>    
+    		<div class="span4"><%= yield %></div>      
+  		</div>
+  </div>
 </body>
 </html>

@@ -1,0 +1,29 @@
+<h2>Editar Registro</h2>
+
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div><%= f.label :email %>
+  <%= f.email_field :email, :autofocus => true %></div>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+  <div><%= f.label :password %> <i>(Dejalo en blanco si no quieres cambiarla)</i>
+  <%= f.password_field :password, :autocomplete => "off" %></div>
+
+  <div><%= f.label :password_confirmation %><br />
+  <%= f.password_field :password_confirmation %></div>
+
+  <div><%= f.label :current_password %> <i>(Ingrese contraseña actual para confirmar los cambios)</i>
+  <%= f.password_field :current_password %></div>
+
+  <div><%= f.submit "Actualizar", :class => 'btn btn-info' %></div>
+<% end %>
+
+<h3>Deseas cancelar tu Cuenta?</h3>
+
+<p><%= button_to "Cancelar cuenta", registration_path(resource_name), :data => { :confirm => "Estas Seguro?" }, :method => :delete, :class => 'btn btn-info' %></p>
+
+<%= link_to "Volver Atras", :back , :class => 'btn btn-info' %>
